@@ -219,7 +219,7 @@
 
 	function loadpk() {
         console.log('iniciou o metodo')
-		var personagensSW = document.getElementById('saNomes').value ;
+		var personagensSW = document.getElementById('saNomes').value -1 ;
 		document.getElementById('c1').style.display = "block";
 		console.log('passou aqui')
 		console.log(personagensSW)
@@ -235,7 +235,7 @@
 				console.log(data);
 				document.getElementById('c1').style.display = "none";
 
-				if (personagensSW > 0) {
+				if (personagensSW > -1) {
 					console.log('chegou aqui')
 					document.getElementById('infPersonagem').style.display = "block";
 					document.getElementById('picFront').style.display = "block";
@@ -268,7 +268,7 @@
 	//SEGUNDA COMBO
 	function loadpk2() {
 
-		var personagensSW = document.getElementById('saNomes2').value ;
+		var personagensSW = document.getElementById('saNomes2').value -1;
 		document.getElementById('c2').style.display = "block";
 		console.log('passou aqui')
 		console.log(personagensSW)
@@ -283,7 +283,7 @@
 				console.log(data);
 				document.getElementById('c2').style.display = "none";
 
-				if (personagensSW > 0) {
+				if (personagensSW > -1) {
 
 					document.getElementById('infPersonagem2').style.display = "block";
 					document.getElementById('picFront2').style.display = "block";
