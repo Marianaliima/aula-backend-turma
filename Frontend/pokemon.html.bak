@@ -1,0 +1,284 @@
+
+<html>
+	<head>
+		<style>
+			body {
+				margin-left: 1px;
+				margin-top: -16px;
+			    background-image: url(img/bg.jpg);
+				height: 100%;
+				width: 100%;
+				background-size: 100%;
+				font-family: system-ui;
+				margin: auto;
+				text-shadow: 0px 3px 2px black;
+				color: white;
+				font-size: 30px;
+				background-repeat: round;
+				}
+			
+			/*#CardSW {
+				background-image: url("img/bg.jpg");
+				background-repeat: no-repeat;
+				height: 100%;
+				width: 100%;
+				background-size: 100%;
+				font-family: system-ui;
+				margin: auto;
+				text-shadow: 0px 3px 2px black;
+				color: white;
+				font-size: 30px;
+			}*/
+			
+			#CardSW div#bt1 {
+				width: 50px;
+				height: 50px;
+				/* border: 1px solid; */
+				position: relative;
+				top: 135px;
+				left: 80px;
+				cursor: pointer;	
+				background: white;
+			}
+						
+			#CardSW h4 {
+				text-transform: uppercase;
+				width: 45%;
+				margin: 0px auto;
+				text-align: center;
+				/* padding-top: 10px; */
+				position: relative;
+				top: 20px;
+				text-shadow: 0px 3px 2px black;
+				color: white;
+				/* font-size: 40px; */
+			}
+			
+			#CardSW input#numeroPk {
+				width: 50px;
+				text-align: center;
+				margin: auto;
+				position: relative;
+				/* float: left; */
+				display: flex;
+				top: 85px;
+			}
+			
+			#CardSW h2#nome {
+				text-transform: uppercase;
+				width: 80%;
+				margin: 0px auto;
+				text-align: center;
+				position: relative;
+				text-shadow: 2px 1px 4px black;
+				color: white;
+				font-size: 30px;
+			}
+			
+			#CardSW div#comboImagem {
+				width: 50%;
+				margin: 0px auto ;
+				text-align: center;
+			}			
+						
+			#CardSW div#numero {
+				width: 50px;
+				/* display: flex; */
+				/* margin-top: 20px; */
+				padding-top: 35px;
+				padding-left: 22px;
+				font-weight: bold;
+				font-size: 20px;
+				color: white;
+			}
+			
+			#CardSW div#habilidades {
+				position: relative;
+				margin-top: 0px;
+				font-size: 25px;
+				text-align: center;
+				color: white;
+				text-transform: capitalize;
+				text-shadow: 2px 1px 4px black;
+			}
+			
+			#CardSW div#grupo {
+				position: relative;
+				margin-top: 13px;
+				font-size: 25px;
+				text-align: center;
+				color: white;
+				text-transform: capitalize;
+				text-shadow: 2px 1px 4px black;
+			}
+			
+			#CardSW img#picFront {
+				
+			}
+
+			#CardSW .tag {
+				font-size: 15px;
+				margin-top: 15px;
+				margin-bottom: -5px;
+			}
+			
+			#CardSW div#infPersonagem {
+				    width: 30%;
+					text-align: center;
+					/*background-color: #d6dfe9;*/
+					display: none;
+					border-radius: 10px;
+					height: 410px;
+					box-shadow: 6px 11px 11px 4px #26252899;
+			}
+			
+			#CardSW div#showResultado {
+				width: 60%;
+				margin: 30px auto auto auto;
+				display: flex;
+			}
+			
+			#CardSW select#saNomes {
+				width: 20%;
+				margin: -10px 40% auto 40%;
+				height: 40px;
+				border-radius: 5px;
+				text-align: center;
+				font-size: 15px;
+				cursor: pointer;
+			}
+			
+			#CardSW #logoSW  img{
+				width: 20%;
+				margin: 20px 40% auto 40%;
+			}
+			
+			#CardSW img#picFront {
+				bottom: 80px;
+				position: absolute;
+				/* left: 50%; */
+				filter: drop-shadow(0px 9px 6px white);
+			}
+				
+	</style>
+
+	</head>
+
+<script>
+
+
+	var carregarPersonagens="https://swapi.dev/api/people/?format=json";
+	
+	console.log(carregarPersonagens);
+		
+	fetch (carregarPersonagens)
+		.then((response)=> {
+			return response.json();
+		})
+			
+		.then ((data) => {		
+			console.log(data);		
+		})
+	
+	
+	
+	
+
+function loadpk(){
+
+	var valorPk= document.getElementById("saNomes").value;
+	
+	var url="https://swapi.dev/api/people/"+valorPk+"/";
+	
+	fetch (url)
+		.then((response)=> {
+			return response.json();
+		})
+			
+		.then ((data) => {
+					
+			console.log(data);
+			
+			if (valorPk > 0) {
+
+			
+				document.getElementById("infPersonagem").style.display = "block";
+				document.getElementById("comboImagem").style.display = "block";	
+				
+				document.getElementById('nome').innerHTML = data['name'];			
+				document.getElementById('aniversario').innerHTML = "<div class='tag'>Aniversário: </div>" +data['birth_year'];
+				document.getElementById('sexo').innerHTML = "<div class='tag'>Sexo: </div>" +data['gender'];
+				document.getElementById('corPele').innerHTML = "<div class='tag'>Cor da pele: </div>" +data['skin_color'];
+				document.getElementById('corOlhos').innerHTML = "<div class='tag'>Cor dos olhos: </div>" + data['eye_color'];
+				
+				
+				let img = data['name'];
+				document.getElementById('picFront').setAttribute('src','./img/'+img+'.png');
+			
+			}else{
+			document.getElementById("infPersonagem").style.display = "none";
+			document.getElementById("comboImagem").style.display = "none";		
+			
+			}
+			
+		})
+
+	    .catch((erro) => {
+			console.log("Erro:"+erro);
+		});
+		
+}
+
+
+
+</script>
+<body>
+
+
+<br>
+
+<div id="CardSW">
+	
+	<div id="logoSW"><img src="img/logo.png"></div>
+	<h4>Selecione o seu personagem:</h4> 
+	<br>
+	
+	<select id="saNomes" onclick="loadpk()">
+		<option value="0">Selecione o seu personagem</option>
+		<option value="1">Luke Skywalker</option>
+		<option value="2">C-3PO</option>
+		<option value="3">R2-D2</option>
+		<option value="4">Darth Vader</option>
+		<option value="5">Leia Organa</option>
+		<option value="6">Owen Lars</option>
+		<option value="7">Beru Whitesun lars</option>
+		<option value="8">R5-D4</option>
+		<option value="10">LObi-Wan Kenobi</option>
+		<option value="13">Chewbacca</option>
+		<option value="14">Han Solo</option>
+		<option value="20">Yoda</option>
+	</select>
+	
+	
+	<div id="showResultado">
+		<div id="infPersonagem">
+			<br>			
+			<h2 id="nome"></h2>
+			<div id="aniversario"></div>
+			<div id="sexo"></div>
+			<div id="corPele"></div>
+			<div id="corOlhos"></div>
+			<br>			
+		</div>	
+		<div id="comboImagem">
+			<img id="picFront">		
+		</div>	
+	</div>
+	
+	
+</div>
+
+<body>
+
+
+</html>
