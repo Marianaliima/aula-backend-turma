@@ -10,4 +10,8 @@ router.get('/personagens/:id', PersonagemController.findOnePersonagemById)
 
 router.post('/personagem/', PersonagemController.createPersonagem)
 
+router.patch('/personagens/:id', PersonagemController.updateOnePersonagem)
+
+router.delete('/personagem/:id', PersonagemController.deleteOnePersonagem)
+
 module.exports = router
